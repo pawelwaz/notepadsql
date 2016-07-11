@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Sphere?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notepadsql.RegisterController">
+   <children>
+      <Canvas height="331.0" layoutX="29.0" layoutY="35.0" width="543.0" />
+      <Sphere layoutX="300.0" layoutY="200.0" radius="60.0" />
+   </children>
+</AnchorPane>
