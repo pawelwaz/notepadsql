@@ -1,6 +1,8 @@
 create database if not exists notepadsql DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE USER IF NOT EXISTS 'notepadsql'@'%' IDENTIFIED BY 'notepadsql';
-grant all privileges on notepadsql.* to 'notepadsql'@'%';
+CREATE USER IF NOT EXISTS 'notepadsql'@'localhost' IDENTIFIED BY 'notepadsql';
+grant all on notepadsql.* to 'notepadsql'@'%';
+grant all on notepadsql.* to 'notepadsql'@'localhost';
 flush privileges;
 use notepadsql;
 

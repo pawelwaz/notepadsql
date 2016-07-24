@@ -5,27 +5,56 @@
  */
 package notepadsql;
 
+import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import java.sql.*;
 
 /**
  *
  * @author A20111
  */
-public class LoginController implements Initializable {
-    @FXML private AnchorPane ap;
+public class LoginController extends Session implements Initializable {
+    @FXML public AnchorPane ap;
+    @FXML public TextField hostField;
+    @FXML public TextField loginField;
+    @FXML public PasswordField passwordField;
     
     @FXML
-    private void logUser(ActionEvent event) {
-        
+    private void logUser() {
+        if(loginField.getText().length() == 0 || passwordField.getText().length() == 0 || hostField.getText().length() == 0) {
+            Alert a = new Alert(AlertType.ERROR);
+            a.setContentText("Wszystkie dane logowania muszą zostać podane!");
+            a.showAndWait();
+        }
+        else {
+            String sql = "select usersid from users where login = '" + loginField.getText() + "' and password = md5('" + passwordField.getText() + "')";
+            ResultSet rs = SQLHelper.doSelect(sql, hostField.getText());
+            try {
+                if(rs.next()) {
+                    setUserName(loginField.getText());
+                    setUserId(rs.getInt("usersid"));
+                }
+                else {
+                    Alert a = new Alert(AlertType.ERROR);
+                    a.setContentText("Błędne dane logowania!");
+                    a.showAndWait();
+                }
+            }
+            catch(Exception e) {
+                
+            }
+        }
     }
     
     @FXML
