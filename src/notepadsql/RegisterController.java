@@ -57,33 +57,32 @@ public class RegisterController implements Initializable {
             a.setContentText("Wszystkie pola muszą zostać wypełnione!");
             a.showAndWait();
         }
+        else if(!passwordField.getText().equals(repeatPassword.getText())) {
+            Alert a = new Alert(AlertType.ERROR, "Podane hasła różnią się!");
+            a.showAndWait();
+        }
         else {
             Connection conn = null;
             Statement stmt = null;
             ResultSet rs = null;
-            try{
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/notepadsql", "notepadsql", "notepadsql");
-                stmt = conn.createStatement();
-                String sql = "select usersid from users where login = '" + loginField.getText() + "' and password = md5('" + passwordField.getText() + "')";
-                rs = stmt.executeQuery(sql);
-               
+            String sql = "select usersid from users where login = '" + loginField.getText() + "';";
+            rs = SQLHelper.doSelect(sql, hostField.getText(), conn, stmt);
+            try {
+                if(rs.next()) {
+                    Alert a = new Alert(AlertType.ERROR, "Login jest już zajęty!");
+                    a.showAndWait();
+                }
+                else {
+                    sql = "insert into users(login, password) values('" + loginField.getText() + "', md5('" + passwordField.getText() + "'));";
+                    SQLHelper.doInsert(sql, hostField.getText());
+                    Alert a = new Alert(AlertType.INFORMATION, "Użytkownik został zarejestrowany");
+                    a.showAndWait();
+                    goLogin();
+                }
             }
             catch(Exception e) {
-                Alert a = new Alert(AlertType.ERROR);
-                a.setContentText("Problem z połączeniem do serwera!");
-                a.showAndWait();
             }
-            finally {
-                try {
-                    if(rs != null) rs.close();
-                    if(stmt != null) stmt.close();
-                    if(conn != null) conn.close();
-                }
-                catch(Exception e) {
-                    
-                }
-            }
+            SQLHelper.close(conn, stmt, rs);
         }
     }
 

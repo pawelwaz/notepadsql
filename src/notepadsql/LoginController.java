@@ -39,11 +39,16 @@ public class LoginController extends Session implements Initializable {
         }
         else {
             String sql = "select usersid from users where login = '" + loginField.getText() + "' and password = md5('" + passwordField.getText() + "')";
-            ResultSet rs = SQLHelper.doSelect(sql, hostField.getText());
+            Connection conn = null;
+            Statement stmt = null;
+            ResultSet rs = SQLHelper.doSelect(sql, hostField.getText(), conn, stmt);
+            
             try {
                 if(rs.next()) {
                     setUserName(loginField.getText());
                     setUserId(rs.getInt("usersid"));
+                    SQLHelper.close(conn, stmt, rs);
+                    goNotes();
                 }
                 else {
                     Alert a = new Alert(AlertType.ERROR);
@@ -52,8 +57,25 @@ public class LoginController extends Session implements Initializable {
                 }
             }
             catch(Exception e) {
-                
             }
+            finally {
+                SQLHelper.close(conn, stmt, rs);
+            }
+        }
+    }
+    
+    private void goNotes() {
+         try {
+            Parent root = FXMLLoader.load(getClass().getResource("Notes.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            Stage thisStage = (Stage) ap.getScene().getWindow();
+            thisStage.close();
+        }
+        catch(Exception e) {
+            
         }
     }
     
@@ -76,7 +98,6 @@ public class LoginController extends Session implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
     
 }
