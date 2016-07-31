@@ -12,6 +12,7 @@ package notepadsql;
 public class Session {
     private static String userName;
     private static Integer userId;
+    private static String host;
     
     public String getUserName() {
         return userName;
@@ -21,11 +22,19 @@ public class Session {
         return userId;
     }
     
+    public String getHost() {
+        return host;
+    }
+    
     public void setUserName(String name) {
         userName = name;
     }
     
     public void setUserId(Integer id) {
         userId = id;
+    }
+    
+    public void setHost(String newHost) {
+        host = newHost;
     }
 }

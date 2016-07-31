@@ -75,6 +75,18 @@ public class RegisterController implements Initializable {
                 else {
                     sql = "insert into users(login, password) values('" + loginField.getText() + "', md5('" + passwordField.getText() + "'));";
                     SQLHelper.doInsert(sql, hostField.getText());
+                    sql = "select usersid from users where login = '" + loginField.getText() + "';";
+                    rs = SQLHelper.doSelect(sql, hostField.getText(), conn, stmt);
+                    int userid = 0;
+                    if(rs.next()) userid = rs.getInt("usersid");
+                    sql = "insert into categories(name, description, categories_usersid) values('dom', 'notatki związane ze sprawami domowymi', " + userid + ");";
+                    SQLHelper.doInsert(sql, hostField.getText());
+                    sql = "insert into categories(name, description, categories_usersid) values('praca', 'notatki związane ze sprawami zawodowymi', " + userid + ");";
+                    SQLHelper.doInsert(sql, hostField.getText());
+                    sql = "insert into categories(name, description, categories_usersid) values('urodziny', 'daty urodzin', " + userid + ");";
+                    SQLHelper.doInsert(sql, hostField.getText());
+                    sql = "insert into categories(name, description, categories_usersid) values('samochód', 'notatki związane z samochodem', " + userid + ");";
+                    SQLHelper.doInsert(sql, hostField.getText());
                     Alert a = new Alert(AlertType.INFORMATION, "Użytkownik został zarejestrowany");
                     a.showAndWait();
                     goLogin();

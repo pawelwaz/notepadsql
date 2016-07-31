@@ -19,6 +19,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.sql.*;
+import javafx.stage.Modality;
 
 /**
  *
@@ -47,6 +48,7 @@ public class LoginController extends Session implements Initializable {
                 if(rs.next()) {
                     setUserName(loginField.getText());
                     setUserId(rs.getInt("usersid"));
+                    setHost(hostField.getText());
                     SQLHelper.close(conn, stmt, rs);
                     goNotes();
                 }
@@ -65,7 +67,7 @@ public class LoginController extends Session implements Initializable {
     }
     
     private void goNotes() {
-         try {
+        try {
             Parent root = FXMLLoader.load(getClass().getResource("Notes.fxml"));
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -83,12 +85,12 @@ public class LoginController extends Session implements Initializable {
     private void goRegister() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("Register.fxml"));
+            Stage thisStage = (Stage) ap.getScene().getWindow();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setResizable(false);
             stage.setScene(scene);
-            stage.show();
-            Stage thisStage = (Stage) ap.getScene().getWindow();
+            stage.showAndWait();
             thisStage.close();
         }
         catch(Exception e) {

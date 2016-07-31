@@ -3,21 +3,29 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="553.0" prefWidth="891.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="notepadsql.NotesController">
+<AnchorPane id="AnchorPane" fx:id="ap" prefHeight="553.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notepadsql.NotesController">
    <children>
       <BorderPane layoutX="346.0" layoutY="127.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <AnchorPane prefHeight="115.0" prefWidth="891.0" style="-fx-background-color: #1c4155;" BorderPane.alignment="CENTER">
                <children>
                   <Label fx:id="loginLabel" layoutX="754.0" layoutY="14.0" text="Jesteś zalogowany jako" textAlignment="RIGHT" textFill="WHITE" AnchorPane.rightAnchor="14.0" />
-                  <Button layoutX="744.0" layoutY="76.0" mnemonicParsing="false" onAction="#goCategories" prefHeight="42.0" prefWidth="149.0" style="-fx-background-color: #f36214; -fx-border-radius: 0px;" text="Zarządzaj kategoriami" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="14.0">
+                  <Button layoutX="744.0" layoutY="76.0" mnemonicParsing="false" onAction="#addCategory" prefHeight="42.0" prefWidth="149.0" style="-fx-background-color: #f36214; -fx-border-radius: 0px;" text="Dodaj kategorię" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="14.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutX="564.0" layoutY="57.0" mnemonicParsing="false" onAction="#addNote" prefHeight="42.0" prefWidth="149.0" style="-fx-background-color: #f36214; -fx-border-radius: 0px;" text="Dodaj notatkę" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="178.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -34,14 +42,6 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <Button layoutX="564.0" layoutY="57.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="149.0" style="-fx-background-color: #f36214; -fx-border-radius: 0px;" text="Dodaj notatkę" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="178.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
                </children>
             </AnchorPane>
          </top>
@@ -53,12 +53,23 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <AnchorPane fx:id="apLeft" layoutX="20.0" layoutY="41.0" prefHeight="394.0" prefWidth="230.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                  <ScrollPane fx:id="leftScroll" hbarPolicy="NEVER" layoutX="20.0" layoutY="35.0" pannable="true" prefHeight="397.0" prefWidth="230.0" style="-fx-background-color: #1c4155; -fx-background: #1c4155;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="37.0">
+                    <content>
+                      <AnchorPane fx:id="apLeft" maxWidth="228.0" minWidth="228.0" prefWidth="228.0" style="-fx-background-color: #1c4155;" />
+                    </content>
+                  </ScrollPane>
                </children>
             </AnchorPane>
          </left>
          <center>
-            <AnchorPane fx:id="apCenter" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ScrollPane fx:id="rightScroll" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" prefHeight="296.0" prefWidth="356.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                      <AnchorPane fx:id="apCenter" />
+                    </content>
+                  </ScrollPane>
+               </children></AnchorPane>
          </center>
       </BorderPane>
    </children>

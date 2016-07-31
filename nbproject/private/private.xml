@@ -5,9 +5,14 @@
         <group>
             <file>file:/C:/Users/pawel/Documents/GitHub/notepadsql/src/notepadsql/Session.java</file>
             <file>file:/C:/Users/pawel/Documents/GitHub/notepadsql/src/notepadsql/NotesController.java</file>
-            <file>file:/C:/Users/pawel/Documents/GitHub/notepadsql/src/notepadsql/LoginController.java</file>
+            <file>file:/C:/Users/pawel/Documents/GitHub/notepadsql/src/notepadsql/NoteController.java</file>
+            <file>file:/C:/Users/pawel/Documents/GitHub/notepadsql/src/notepadsql/EditPopup.java</file>
+            <file>file:/C:/Users/pawel/Documents/GitHub/notepadsql/src/notepadsql/UIHelper.java</file>
             <file>file:/C:/Users/pawel/Documents/GitHub/notepadsql/src/notepadsql/SQLHelper.java</file>
-            <file>file:/C:/Users/pawel/Documents/GitHub/notepadsql/src/notepadsql/NotepadSQL.java</file>
+            <file>file:/C:/Users/pawel/Documents/GitHub/notepadsql/src/notepadsql/CategoryButton.java</file>
+            <file>file:/C:/Users/pawel/Documents/GitHub/notepadsql/src/notepadsql/NoteButton.java</file>
+            <file>file:/C:/Users/pawel/Documents/GitHub/notepadsql/src/notepadsql/RegisterController.java</file>
+            <file>file:/C:/Users/pawel/Documents/GitHub/notepadsql/src/notepadsql/CategoryController.java</file>
         </group>
     </open-files>
 </project-private>

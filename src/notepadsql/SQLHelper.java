@@ -22,8 +22,9 @@ public class SQLHelper {
         ResultSet rs = null;
         try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://" + host +"/notepadsql", "notepadsql", "notepadsql");
+            conn = DriverManager.getConnection("jdbc:mysql://" + host +"/notepadsql" + "?useUnicode=true&characterEncoding=utf-8", "notepadsql", "notepadsql");
             stmt = conn.createStatement();
+            stmt.execute("SET NAMES 'utf8'");
             rs = stmt.executeQuery(sql);
         }
         catch(Exception e) {
@@ -40,8 +41,9 @@ public class SQLHelper {
         Statement stmt = null;
         try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://" + host +"/notepadsql", "notepadsql", "notepadsql");
+            conn = DriverManager.getConnection("jdbc:mysql://" + host +"/notepadsql" + "?useUnicode=true&characterEncoding=utf-8", "notepadsql", "notepadsql");
             stmt = conn.createStatement();
+            stmt.execute("SET NAMES utf8");
             stmt.executeUpdate(sql);
         }
         catch(Exception e) {
